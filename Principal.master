@@ -1,0 +1,110 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Principal.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Store</title>
+    
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/materialize.css" type="text/css"/>
+    <link rel="stylesheet" href="~/css/Site.css" type="text/css"/>
+    <link rel="stylesheet" href="~/fonts/font-awesome/css/font-awesome.min.css"  type="text/css"/>
+
+    <script  type="text/javascript" src="<%= ResolveUrl("~/Scripts/jquery-1.10.2.js") %>"></script>
+    <script  type="text/javascript" src="<%= ResolveUrl("~/Scripts/materialize.min.js") %>"></script>
+    <script  type="text/javascript" src="<%= ResolveUrl("~/Scripts/init.js") %>"></script>
+
+</head>
+<body>
+    <form runat="server">
+    <div class="navbar-fixed">
+    <nav>
+    <div class="nav-wrapper blue-grey darken-4">
+      <a href="Default.aspx" class="brand-logo center waves-effect">Store</a>
+      <a href="#" data-activates="menu-mobile" class="button-collapse"><i class="fa fa-bars right"></i></a>
+      <ul class="left hide-on-med-and-down">
+        <li><a runat="server" href="~/Productos.aspx?to=Hombre">Hombre</a></li>
+        <li><a runat="server" href="~/Productos.aspx?to=Mujer">Mujer</a></li>
+        <li><a runat="server" href="~/Productos.aspx?to=Niños">Niños</a></li>
+        <li><a runat="server" href="~/Suscripcion">Suscribirse</a></li>
+        <li><a runat="server" href="~/Contacto">Contacto</a></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+            <li><a runat="server" href="~/Carrito">Carrito</a></li>
+            <li>
+              <% if (Session["usuario"] != null)
+                  { %>
+                    <a href="#" data-activates="menu-sesion" class="button-collapse cyan show-on-large">
+                            Hola, <%= Session["usuario"] %><i class="fa fa-caret-down right" style="font-size: 24px;"></i>
+                    </a>                      
+              <% } else { %>
+                    <a runat="server" href="~/login.aspx">Iniciar Sesión</a>
+              <% } %>    
+            </li>
+    
+      </ul>
+      <ul id="menu-sesion" class="side-nav">
+        <li><a href="Cuenta.aspx">Configurar cuenta</a></li>
+        <li class="divider"></li>
+        <li>                
+            <a href="Logout.aspx">Cerrar sesión</a>
+        </li>
+      </ul>
+
+      <ul class="side-nav" id="menu-mobile">
+        <li><a runat="server" href="~/Productos.aspx?to=Hombre">Hombre</a></li>
+        <li><a runat="server" href="~/Productos.aspx?to=Mujer">Mujer</a></li>
+        <li><a runat="server" href="~/Productos.aspx?to=Niños">Niños</a></li>
+        <li><a runat="server" href="~/Suscripcion">Suscribirse</a></li>
+        <li><a runat="server" href="~/Contacto">Contacto</a></li>
+        <li class="divider"></li>
+        <li><a runat="server" href="~/Carrito">Carrito</a></li>
+        <li>
+            <% if(Session["usuario"] != null) { %>
+                    <a href="#" data-activates="dropdown1" class="dropdown-button">
+                        Hola, <%= Session["usuario"] %>                       
+                        
+                        <i class="fa fa-caret-down right" style="font-size: 24px;"></i></a>
+               <%}else{ %>
+                    <a runat="server" href="~/login.aspx">Iniciar Sesión</a>
+               <%} %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+    <ul id="dropdown1" class="dropdown-content">
+        <li> 
+            <a runat="server" href="~/Logout.aspx">Cerrar sesion</a>
+        </li>
+    </ul>
+
+    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+         
+
+<footer class="page-footer blue-grey darken-4">
+    <div class="container">
+    <div class="row">
+        <div class="col l6 s12">
+        <h5 class="white-text">Online Store</h5>
+        <p class="grey-text text-lighten-4">Proyecto realizado con fines academicos.</p>
+        </div>
+    </div>
+     
+    </div>
+    <div class="footer-copyright">
+    <div class="container">
+    © 2016 Todos los derechos reservados.
+        <a class="grey-text text-lighten-4 right" runat="server" href="~/admin/login.aspx">Administrador</a>
+    </div>
+    </div>
+</footer>
+ 
+    </form>
+</body>
+</html>

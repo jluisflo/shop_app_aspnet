@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="DB">
+  <DataContextMoniker Name="/DBDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b6e7f437-27d4-42ca-b9e9-7f35a6e3f549" absoluteBounds="0.5, 0.5, 2, 1.7708968098958331">
+      <DataClassMoniker Name="/DBDataContext/usuario" />
+      <nestedChildShapes>
+        <elementListCompartment Id="428476d3-54fe-4ef5-a28a-e6a0da85eba7" absoluteBounds="0.51499999999999968, 0.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="76d4264a-540a-4e33-9cfc-6c4dee8b976e" absoluteBounds="6.75, 1.75, 2.125, 1.7708968098958331">
+      <DataClassMoniker Name="/DBDataContext/proveedores" />
+      <nestedChildShapes>
+        <elementListCompartment Id="f3e2d8cc-1f63-4a8a-abcc-14ead3ef9ba0" absoluteBounds="6.7650000000000006, 2.21, 2.0949999999999998, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="0bdf2ef7-df69-4f73-a551-282eef7759d3" absoluteBounds="4.875, 2.875, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DBDataContext/marca" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6ae6cfea-b1db-4591-ac64-99957ecf0411" absoluteBounds="4.89, 3.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4c66b8b0-5d17-497d-8099-6cc5ede9e5f6" absoluteBounds="3, 0.5, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DBDataContext/suscriptore" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5c1730ad-8452-4978-8913-e67f9fc7fb17" absoluteBounds="3.0149999999999997, 0.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="ccfc71a3-4920-46d7-aced-75d7890a6246" absoluteBounds="5.625, 0.5, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/DBDataContext/categoria" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0461f63d-499b-433c-8fda-1378240505e2" absoluteBounds="5.64, 0.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.8750005 : 3.52089680989583); (7.8750005 : 3.89109587760417); (6.875 : 3.89109587760417)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DBDataContext/proveedores/proveedores_marca" />
+      <nodes>
+        <classShapeMoniker Id="76d4264a-540a-4e33-9cfc-6c4dee8b976e" />
+        <classShapeMoniker Id="0bdf2ef7-df69-4f73-a551-282eef7759d3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="9fd99084-53b6-4caa-bc7b-3c2d74fabca3" absoluteBounds="0.5, 3.5, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/DBDataContext/producto" />
+      <nestedChildShapes>
+        <elementListCompartment Id="876d02cd-8885-4702-8eaa-131e0b8d1300" absoluteBounds="0.51500000000000012, 3.96, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5.625 : 1.09699625651042); (5.25 : 1.09699625651042); (5.25 : 2.52089680989583); (1.5 : 2.52089680989583); (1.5 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DBDataContext/categoria/categoria_producto" />
+      <nodes>
+        <classShapeMoniker Id="ccfc71a3-4920-46d7-aced-75d7890a6246" />
+        <classShapeMoniker Id="9fd99084-53b6-4caa-bc7b-3c2d74fabca3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6.21875 : 4.2612939453125); (6.21875 : 5.6963525390625); (2.5 : 5.6963525390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/DBDataContext/marca/marca_producto" />
+      <nodes>
+        <classShapeMoniker Id="0bdf2ef7-df69-4f73-a551-282eef7759d3" />
+        <classShapeMoniker Id="9fd99084-53b6-4caa-bc7b-3c2d74fabca3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="c3df638a-e084-4abc-8789-4cfe642b3b4a" absoluteBounds="3.5, 2.75, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/DBDataContext/cliente" />
+      <nestedChildShapes>
+        <elementListCompartment Id="4146ecc0-6fa9-4ac7-b1bb-bb7b58a2f7fe" absoluteBounds="3.515, 3.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

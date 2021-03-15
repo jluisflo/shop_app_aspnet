@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="proyecto" Class="DBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;Initial Catalog=proyecto;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="proyectoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.usuarios" Member="usuarios">
+    <Type Name="usuario">
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="apellidos" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="usuario" Member="usuario1" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="contraseña" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.proveedores" Member="proveedores">
+    <Type Name="proveedores">
+      <Column Name="idProveedor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="telefono" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="eMail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="proveedores_marca" Member="marcas" ThisKey="idProveedor" OtherKey="idProveedor" Type="marca" />
+    </Type>
+  </Table>
+  <Table Name="dbo.marcas" Member="marcas">
+    <Type Name="marca">
+      <Column Name="idMarca" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="idProveedor" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="marca_producto" Member="productos" ThisKey="idMarca" OtherKey="idMarca" Type="producto" />
+      <Association Name="proveedores_marca" Member="proveedores" ThisKey="idProveedor" OtherKey="idProveedor" Type="proveedores" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.suscriptores" Member="suscriptores">
+    <Type Name="suscriptore">
+      <Column Name="idSuscriptor" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="eMail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.categorias" Member="categorias">
+    <Type Name="categoria">
+      <Column Name="idCategoria" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Association Name="categoria_producto" Member="productos" ThisKey="idCategoria" OtherKey="idCategoria" Type="producto" />
+    </Type>
+  </Table>
+  <Table Name="dbo.productos" Member="productos">
+    <Type Name="producto">
+      <Column Name="idProducto" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="idCategoria" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idMarca" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="modelo" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="precio" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="stock" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="publico" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="imagen" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="categoria_producto" Member="categoria" ThisKey="idCategoria" OtherKey="idCategoria" Type="categoria" IsForeignKey="true" />
+      <Association Name="marca_producto" Member="marca" ThisKey="idMarca" OtherKey="idMarca" Type="marca" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.clientes" Member="clientes">
+    <Type Name="cliente">
+      <Column Name="idCliente" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombre" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="apellidos" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="genero" Type="System.String" DbType="NVarChar(25)" CanBeNull="true" />
+      <Column Name="nacimiento" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="eMail" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="contraseña" Type="System.String" DbType="NVarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="fechaRegistro" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.agregarUsuario" Method="agregarUsuario">
+    <Parameter Name="nom" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ape" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="usu" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarUsuario" Method="eliminarUsuario">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarUsuario" Method="modificarUsuario">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nom" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ape" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="usu" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarCliente" Method="eliminarCliente">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.agregarCategoria" Method="agregarCategoria">
+    <Parameter Name="cate" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarCategoria" Method="eliminarCategoria">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarCategoria" Method="modificarCategoria">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="cate" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarProveedor" Method="eliminarProveedor">
+    <Parameter Name="idProveedor" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.agregarProveedor" Method="agregarProveedor">
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="telefono" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="eMail" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="direccion" Type="System.String" DbType="Text" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarProveedor" Method="modificarProveedor">
+    <Parameter Name="idProveedor" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="telefono" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="eMail" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="direccion" Type="System.String" DbType="Text" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.agregarMarca" Method="agregarMarca">
+    <Parameter Name="marca" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="idPro" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarMarca" Method="eliminarMarca">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarMarca" Method="modificarMarca">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="idPro" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarSuscriptor" Method="modificarSuscriptor">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nom" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.agregarSuscriptor" Method="agregarSuscriptor">
+    <Parameter Name="nom" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarSuscriptor" Method="eliminarSuscriptor">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.eliminarProducto" Method="eliminarProducto">
+    <Parameter Name="idProducto" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.agregarProducto" Method="agregarProducto">
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="descripcion" Type="System.String" DbType="Text" />
+    <Parameter Name="idCategoria" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idMarca" Type="System.Int32" DbType="Int" />
+    <Parameter Name="modelo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="precio" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="stock" Type="System.Int32" DbType="Int" />
+    <Parameter Name="publico" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="imagen" Type="System.String" DbType="Text" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarProducto" Method="modificarProducto">
+    <Parameter Name="idProducto" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nombre" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="descripcion" Type="System.String" DbType="Text" />
+    <Parameter Name="idCategoria" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idMarca" Type="System.Int32" DbType="Int" />
+    <Parameter Name="modelo" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="precio" Type="System.Decimal" DbType="Money" />
+    <Parameter Name="stock" Type="System.Int32" DbType="Int" />
+    <Parameter Name="publico" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="imagen" Type="System.String" DbType="Text" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.agregarCliente" Method="agregarCliente">
+    <Parameter Name="nom" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ape" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="genero" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="nacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.modificarCliente" Method="modificarCliente">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="nom" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="ape" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="genero" Type="System.String" DbType="NVarChar(25)" />
+    <Parameter Name="nacimiento" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="pass" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
